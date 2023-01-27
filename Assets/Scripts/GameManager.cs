@@ -7,14 +7,22 @@ public class GameManager : MonoBehaviour
     public GameObject enemyPref;
     public bool waveRunning;
     public GameObject Obstacle;
+    public GameObject Boss;
 
+    public GameObject bossSpawn;
 
     public float currentTime;
+    public float startTime;
+
+    private bool bossSpawned;
+    private GameObject[] bosses;
     // Start is called before the first frame update
     void Start()
     {
         currentTime = Time.time;
         waveRunning = true;
+        startTime = Time.time;
+        bossSpawned = false;
     }
 
     // Update is called once per frame
@@ -22,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         currentTime = Time.time;
 
-        if (currentTime < 20)
+        if (currentTime < startTime + 20)
         {
             if(waveRunning == true)
             {
@@ -31,7 +39,7 @@ public class GameManager : MonoBehaviour
             }
             
         }
-        if (currentTime < 30)
+        if (currentTime < startTime + 30)
         {
             if (waveRunning == true)
             {
@@ -40,15 +48,23 @@ public class GameManager : MonoBehaviour
             }
 
         }
-        if(currentTime < 50 && currentTime > 30)
+        if(currentTime < startTime + 50 && currentTime > 30 + startTime)
         {
             if(waveRunning == true)
             {
-                StartCoroutine(waveObst(5, 3));
+                StartCoroutine(waveObst(10, 2));
                 waveRunning = false;
             }
         }
 
+        if(bossSpawned == true)
+        {
+            bosses = GameObject.FindGameObjectsWithTag("enemy");
+            if(bosses.Length <= 0)
+            {
+                EndGame();
+            }
+        }
     }
     IEnumerator wave(int waveCount, int time)
     {
@@ -69,5 +85,11 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
         waveRunning = true;
+        Instantiate(Boss, bossSpawn.transform.position, Boss.transform.rotation);
+        bossSpawned = true;
+    }
+    void EndGame()
+    {
+        Debug.Log("Ending Sequence Initiated");
     }
 }

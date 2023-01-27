@@ -10,6 +10,7 @@ TagManager:
   - bullet
   - blade
   - Obstacle
+  - boulder
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - BladeLayer
   - Obstacle
   - wall
-  - 
+  - 'Boss '
   - 
   - 
   - 

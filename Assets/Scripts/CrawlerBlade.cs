@@ -23,9 +23,13 @@ public class CrawlerBlade : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "bullet")
+        if(collision.gameObject.tag == "bullet" && this.gameObject.tag != "boulder")
         {
             Destroy(this.gameObject);
+        }
+        if (collision.gameObject.tag == "bullet" && this.gameObject.tag == "boulder")
+        {
+            Destroy(collision.gameObject);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

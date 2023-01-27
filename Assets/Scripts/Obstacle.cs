@@ -11,6 +11,7 @@ public class Obstacle : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.down.normalized * PushForce;
     }
 
     // Update is called once per frame
@@ -18,7 +19,7 @@ public class Obstacle : MonoBehaviour
     {
         rb.velocity = Vector2.down.normalized * PushForce;
 
-        if(this.transform.position.y < -6.8f)
+        if (this.transform.position.y < -6.8f)
         {
             Destroy(this.gameObject);
         }
@@ -28,6 +29,14 @@ public class Obstacle : MonoBehaviour
         if(other.gameObject.tag == "bullet")
         {
             Destroy(other.gameObject);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "enemy")
+        {
+            Destroy(collision.gameObject);
+            rb.velocity = Vector2.down.normalized * PushForce;
         }
     }
 }

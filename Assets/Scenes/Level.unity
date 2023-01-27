@@ -1921,11 +1921,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 1300582730}
   Bullet: {fileID: 5135364240366514937, guid: 95799775bbc538d47af4d095566cbc78, type: 3}
-  health: 0
+  health: 100
   DeathMenu: {fileID: 1832232763}
   PauseMenu: {fileID: 1799340226}
   isDead: 0
   sprite: {fileID: 1537381935}
+  fireRate: 0.25
 --- !u!61 &1537381939
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1984,7 +1985,10 @@ MonoBehaviour:
   enemyPref: {fileID: 1767025440460975363, guid: b4ff9bc397864b04d85868e510f8b07d, type: 3}
   waveRunning: 0
   Obstacle: {fileID: 1181204268943804505, guid: 766d84211a1b4d3429f2a37b974d719d, type: 3}
+  Boss: {fileID: 4284314858941276965, guid: e304883b07f048c4d990ec5500afc5f5, type: 3}
+  bossSpawn: {fileID: 2060662344}
   currentTime: 0
+  startTime: 0
 --- !u!4 &1547583133
 Transform:
   m_ObjectHideFlags: 0
@@ -2531,6 +2535,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030151850}
   m_CullTransparentMesh: 1
+--- !u!1 &2060662344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2060662345}
+  m_Layer: 10
+  m_Name: bossSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2060662345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060662344}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 8.78, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2143233656
 GameObject:
   m_ObjectHideFlags: 0

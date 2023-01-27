@@ -17,6 +17,8 @@ public class CharacterControllerScript : MonoBehaviour
     private float moveSpeed, moveHorizontal;
     public SpriteRenderer sprite;
     private Rigidbody2D rb2D;
+    private float nextFire;
+    public float fireRate;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +45,9 @@ public class CharacterControllerScript : MonoBehaviour
         
 
         //firing
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
+            nextFire = Time.time + fireRate;
             Instantiate(Bullet);
         }
 
@@ -80,10 +83,11 @@ public class CharacterControllerScript : MonoBehaviour
             Debug.Log("hit");
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "boulder")
         {
             Die();
         }
+        
     }
 
     public void Die()

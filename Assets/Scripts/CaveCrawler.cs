@@ -48,5 +48,6 @@ public class CaveCrawler : MonoBehaviour
             health -= 40f;
             Destroy(collision.gameObject);
         }
+        
     }
 }
