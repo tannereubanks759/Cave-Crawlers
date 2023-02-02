@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterControllerScript : MonoBehaviour
 {
@@ -13,12 +14,18 @@ public class CharacterControllerScript : MonoBehaviour
     public GameObject DeathMenu;
     public GameObject PauseMenu;
     public bool isDead;
+    
 
     private float moveSpeed, moveHorizontal;
     public SpriteRenderer sprite;
     private Rigidbody2D rb2D;
     private float nextFire;
     public float fireRate;
+
+    public Slider slider;
+
+    private bool isPaused;
+    public GameObject canvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +41,10 @@ public class CharacterControllerScript : MonoBehaviour
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
 
+        isPaused = canvas.GetComponent<UiScript>().GetPaused();
+
         //gun movement
-        if(!isDead)
+        if(!isDead && !isPaused)
         {
             mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
             Vector3 rotation = mousePos - this.transform.position;
@@ -80,12 +89,14 @@ public class CharacterControllerScript : MonoBehaviour
         if(collision.gameObject.tag == "blade")
         {
             health -= 30;
+            slider.value = health;
             Debug.Log("hit");
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "boulder")
         {
             Die();
+            slider.value = 0;
         }
         
     }
@@ -100,4 +111,6 @@ public class CharacterControllerScript : MonoBehaviour
     {
         isDead = value;
     }
+
+    
 }

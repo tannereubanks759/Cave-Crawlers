@@ -65,4 +65,8 @@ public class UiScript : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
     }
+    public bool GetPaused()
+    {
+        return isPaused;
+    }
 }
