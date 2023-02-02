@@ -10,12 +10,15 @@ public class GameManager : MonoBehaviour
     public GameObject Boss;
 
     public GameObject bossSpawn;
+    public GameObject grass;
 
     public float currentTime;
     public float startTime;
 
     private bool bossSpawned;
     private GameObject[] bosses;
+
+    private bool ended;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,7 @@ public class GameManager : MonoBehaviour
         waveRunning = true;
         startTime = Time.time;
         bossSpawned = false;
+        ended = false;
     }
 
     // Update is called once per frame
@@ -60,9 +64,10 @@ public class GameManager : MonoBehaviour
         if(bossSpawned == true)
         {
             bosses = GameObject.FindGameObjectsWithTag("enemy");
-            if(bosses.Length <= 0)
+            if (bosses.Length <= 0 && ended != true)
             {
                 EndGame();
+                ended = true;
             }
         }
     }
@@ -90,6 +95,7 @@ public class GameManager : MonoBehaviour
     }
     void EndGame()
     {
+        Instantiate(grass);
         Debug.Log("Ending Sequence Initiated");
     }
 }
