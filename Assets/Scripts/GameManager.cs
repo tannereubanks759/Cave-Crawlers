@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject enemyPref;
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private bool ended;
 
-    public GameObject EndParticle;
+    
 
     public float endTime;
     // Start is called before the first frame update
@@ -78,8 +78,15 @@ public class GameManager : MonoBehaviour
         }
         if (currentTime > endTime && ended == true)
         {
-            Instantiate(EndParticle);
+            
             ended = false;
+        }
+        if(currentTime > endTime && ended == false)
+        {
+            if(currentTime > endTime + 10)
+            {
+                SceneManager.LoadScene("Ending");
+            }
         }
     }
     IEnumerator wave(int waveCount, int time)

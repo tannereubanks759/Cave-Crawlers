@@ -2308,7 +2308,6 @@ MonoBehaviour:
   grass: {fileID: 5789134203118949955, guid: 62a5bacd0b9d166449fc157c0a693299, type: 3}
   currentTime: 0
   startTime: 0
-  EndParticle: {fileID: 6505285691022813223, guid: e502290abbe80bc41afaea6ba46cc2bb, type: 3}
   endTime: 0
 --- !u!4 &1547583133
 Transform:
