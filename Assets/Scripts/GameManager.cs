@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     private GameObject[] bosses;
 
     private bool ended;
+
+    public GameObject EndParticle;
+
+    public float endTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
         startTime = Time.time;
         bossSpawned = false;
         ended = false;
+        endTime = 999;
     }
 
     // Update is called once per frame
@@ -68,7 +73,13 @@ public class GameManager : MonoBehaviour
             {
                 EndGame();
                 ended = true;
+                bossSpawned = false;
             }
+        }
+        if (currentTime > endTime && ended == true)
+        {
+            Instantiate(EndParticle);
+            ended = false;
         }
     }
     IEnumerator wave(int waveCount, int time)
@@ -95,7 +106,9 @@ public class GameManager : MonoBehaviour
     }
     void EndGame()
     {
+        endTime = Time.time + 5;
         Instantiate(grass);
         Debug.Log("Ending Sequence Initiated");
+        
     }
 }

@@ -26,6 +26,8 @@ public class CharacterControllerScript : MonoBehaviour
 
     private bool isPaused;
     public GameObject canvas;
+
+    public GameObject DeathParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -103,6 +105,7 @@ public class CharacterControllerScript : MonoBehaviour
 
     public void Die()
     {
+        
         isDead = true;
         Time.timeScale = 0f;
         DeathMenu.SetActive(true);

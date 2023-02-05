@@ -675,7 +675,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 86b57141ade02a64faf64de5e6c48e83, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.995283, b: 0.995283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -2154,6 +2154,7 @@ MonoBehaviour:
   fireRate: 0.25
   slider: {fileID: 1547198714}
   canvas: {fileID: 7395612}
+  DeathParticle: {fileID: 6505285691022813223, guid: e502290abbe80bc41afaea6ba46cc2bb, type: 3}
 --- !u!61 &1537381939
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2307,6 +2308,8 @@ MonoBehaviour:
   grass: {fileID: 5789134203118949955, guid: 62a5bacd0b9d166449fc157c0a693299, type: 3}
   currentTime: 0
   startTime: 0
+  EndParticle: {fileID: 6505285691022813223, guid: e502290abbe80bc41afaea6ba46cc2bb, type: 3}
+  endTime: 0
 --- !u!4 &1547583133
 Transform:
   m_ObjectHideFlags: 0
