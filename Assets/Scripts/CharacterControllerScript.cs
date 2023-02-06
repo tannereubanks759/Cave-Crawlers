@@ -22,12 +22,12 @@ public class CharacterControllerScript : MonoBehaviour
     private float nextFire;
     public float fireRate;
 
-    public Slider slider;
-
     private bool isPaused;
     public GameObject canvas;
 
     public GameObject DeathParticle;
+
+    public GameObject healthbar;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +36,8 @@ public class CharacterControllerScript : MonoBehaviour
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         moveSpeed = 2f;
+
+        
     }
 
     // Update is called once per frame
@@ -91,14 +93,13 @@ public class CharacterControllerScript : MonoBehaviour
         if(collision.gameObject.tag == "blade")
         {
             health -= 30;
-            slider.value = health;
-            Debug.Log("hit");
+            healthbar.GetComponent<healthbar>().SetValue(health);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "boulder")
         {
             Die();
-            slider.value = 0;
+            
         }
         
     }
