@@ -28,6 +28,11 @@ public class CharacterControllerScript : MonoBehaviour
     public GameObject DeathParticle;
 
     public GameObject healthbar;
+
+    [SerializeField]
+    public AudioSource source;
+    public AudioClip throwSound;
+    public AudioClip hurtSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +65,9 @@ public class CharacterControllerScript : MonoBehaviour
         //firing
         if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
+            source.clip = throwSound;
+            source.volume = 0.4f;
+            source.Play();
             nextFire = Time.time + fireRate;
             Instantiate(Bullet);
         }
@@ -92,6 +100,9 @@ public class CharacterControllerScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "blade")
         {
+            source.clip = hurtSound;
+            source.volume = 1f;
+            source.Play();
             health -= 30;
             healthbar.GetComponent<healthbar>().SetValue(health);
             Destroy(collision.gameObject);

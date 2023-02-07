@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
 
     private bool ended;
 
-    
+    public GameObject music;
+    public AudioClip bossMusic;
+    public AudioClip endMusic;
 
     public float endTime;
     // Start is called before the first frame update
@@ -108,12 +110,14 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
         waveRunning = true;
+        music.GetComponent<music>().SetMusic(bossMusic);
         Instantiate(Boss, bossSpawn.transform.position, Boss.transform.rotation);
         bossSpawned = true;
     }
     void EndGame()
     {
         endTime = Time.time + 5;
+        music.GetComponent<music>().SetMusic(endMusic);
         Instantiate(grass);
         Debug.Log("Ending Sequence Initiated");
         

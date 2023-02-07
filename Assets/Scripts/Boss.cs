@@ -12,6 +12,10 @@ public class Boss : MonoBehaviour
     public GameObject boulder;
 
     public float health;
+
+    public Animator anim;
+
+    public AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +54,8 @@ public class Boss : MonoBehaviour
 
         if(health <= 0)
         {
-            Destroy(this.gameObject);
+            
+            anim.SetBool("bossDead", true);
         }
     }
 
@@ -84,9 +89,13 @@ public class Boss : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-    void Die()
+    public void Die()
     {
         Destroy(this.gameObject);
+    }
+    public void playSound()
+    {
+        source.Play();
     }
 
 

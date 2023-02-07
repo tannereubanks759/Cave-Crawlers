@@ -33,7 +33,7 @@ public class rotate : MonoBehaviour
                 transform.Rotate(Vector3.back * Time.deltaTime * -40);
             }
 
-            Debug.Log(Time.time);
+            
         }
         
     }

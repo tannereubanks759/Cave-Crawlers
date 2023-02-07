@@ -10,6 +10,10 @@ public class CaveCrawler : MonoBehaviour
     public float fireRate;
     public GameObject blade;
     private float health;
+    public Animator anim;
+    private bool dead = false;
+
+    public AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,14 +27,15 @@ public class CaveCrawler : MonoBehaviour
     {
         rb.velocity = Vector2.down.normalized * PushForce;
 
-        if(Time.time > nextFire)
+        if(Time.time > nextFire && dead != true)
         {
             nextFire = Time.time + fireRate;
             Instantiate(blade, this.gameObject.transform.position, this.gameObject.transform.rotation);
         }
-        if(health <= 0)
+        if(health <= 0 && dead != true)
         {
-            Destroy(this.gameObject);
+            anim.SetBool("die", true);
+            dead = true;
         }
     }
 
@@ -38,7 +43,8 @@ public class CaveCrawler : MonoBehaviour
     {
         if (collision.gameObject.tag == "Wall")
         {
-            Destroy(this.gameObject);
+            anim.SetBool("die", true);
+            dead = true;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,5 +55,14 @@ public class CaveCrawler : MonoBehaviour
             Destroy(collision.gameObject);
         }
         
+    }
+    public void Destroy()
+    {
+        
+        Destroy(this.gameObject);
+    }
+    public void playSound()
+    {
+        source.Play();
     }
 }
