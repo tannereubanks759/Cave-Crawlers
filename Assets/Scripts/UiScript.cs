@@ -10,6 +10,7 @@ public class UiScript : MonoBehaviour
     private Scene scene;
     private bool isPaused;
     public GameObject player;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +35,7 @@ public class UiScript : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("escape")){
+            this.GetComponent<AudioSource>().Play();
             if (isPaused)
             {
                 PauseMenu.SetActive(false);
@@ -51,12 +53,15 @@ public class UiScript : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        this.GetComponent<AudioSource>().Play();
         SceneManager.LoadScene(sceneName);
     }
 
     public void Quit()
     {
+        this.GetComponent<AudioSource>().Play();
         Application.Quit();
+
     }
     public void Resume()
     {
@@ -64,6 +69,7 @@ public class UiScript : MonoBehaviour
         PauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        this.GetComponent<AudioSource>().Play();
     }
     public bool GetPaused()
     {

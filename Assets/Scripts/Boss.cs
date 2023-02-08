@@ -7,8 +7,10 @@ public class Boss : MonoBehaviour
     public GameObject blade;
     public Rigidbody2D rb;
     public GameObject rotateObject;
+    public GameObject rotateObject2;
     public bool bladeRunning;
     public bool boulderRunning;
+    public bool polyRunning;
     public GameObject boulder;
 
     public float health;
@@ -16,12 +18,14 @@ public class Boss : MonoBehaviour
     public Animator anim;
 
     public AudioSource source;
+    public AudioClip shoot;
+    public AudioClip boulderClip;
     // Start is called before the first frame update
     void Start()
     {
         bladeRunning = true;
         boulderRunning = false;
-        
+        polyRunning = false;
     }
 
     // Update is called once per frame
@@ -50,6 +54,11 @@ public class Boss : MonoBehaviour
                 StartCoroutine(boulderWave());
                 boulderRunning = false;
             }
+            if (polyRunning == true)
+            {
+                StartCoroutine(polyAttack());
+                polyRunning = false;
+            }
         }
 
         if(health <= 0)
@@ -72,13 +81,30 @@ public class Boss : MonoBehaviour
 
     IEnumerator boulderWave()
     {
-
+        source.clip = shoot;
         for (int i = 0; i < 10; i++)
         {
             Instantiate(boulder, this.transform.position, this.transform.rotation);
             yield return new WaitForSeconds(1.5f);
         }
+        polyRunning = true;
+    }
+
+    IEnumerator polyAttack()
+    {
+        source.clip = shoot;
+        for (int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                rotateObject2.transform.Rotate(new Vector3(0, 0, rotateObject2.transform.rotation.z + 45));
+                Instantiate(blade, rotateObject2.transform.position, rotateObject2.transform.rotation);
+            }
+            playSound();
+            yield return new WaitForSeconds(.5f);
+        }
         bladeRunning = true;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
